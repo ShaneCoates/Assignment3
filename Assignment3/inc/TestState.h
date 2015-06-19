@@ -12,11 +12,27 @@
 #include <string>
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <PxPhysicsAPI.h>
+#include <PxScene.h>
+#include <pvd\PxVisualDebugger.h>
+using namespace physx;
+
 struct GLFWwindow;
 class FlyCamera;
-class NetworkManager;
-class CheckerBoard;
 class Skybox;
+class Box;
+class Ball;
+class myAllocator : public PxAllocatorCallback {
+public:
+	virtual ~myAllocator() {}
+	virtual void* allocate(size_t size, const char* typeName, const char* filename, int line) {
+		void* pointer = _aligned_malloc(size, 16);
+		return pointer;
+	}
+	virtual void deallocate(void* ptr) {
+		_aligned_free(ptr);
+	}
+};
 class TestState : public IGameState
 {
 public:
@@ -38,29 +54,31 @@ public:
 private:
 
 	void DrawGUI();
-	void UpdateCamera(double _dt);
+
+	void SetUpPhysX();
+	void SetUpVisualDebugger();
+	void UpdatePhysX(double _dt);
+
+	PxFoundation* g_PhysicsFoundation;
+	PxPhysics* g_Physics;
+	PxScene* g_PhysicsScene;
+	PxDefaultErrorCallback g_DefaultErrorCallback;
+	PxDefaultAllocator g_DefaultAllocatorCallback;
+	PxSimulationFilterShader g_DefaultFilterShader = PxDefaultSimulationFilterShader;
+	PxMaterial* g_PhysicsMaterial;
+	PxMaterial* g_boxMaterial;
+	PxCooking* g_PhysicsCooker;
+
+
 	GLFWwindow* m_window;
 	GameStateManager* m_gameStateManager;
 
 	FlyCamera* m_camera;
 
-	NetworkManager* m_networkServer;
-	NetworkManager* m_networkClient;
-	std::string m_clientName;
-	std::string m_serverIP;
-	unsigned int m_serverPort;
-
-	bool m_serverRunning;
-
-	CheckerBoard* m_checkerBoard;
 	Skybox* m_skybox;
-	double m_targetCameraAngle;
-	const double m_redTargetCameraAngle = M_PI;
-	const double m_blackTargetCameraAngle = M_PI * 2;
-	double m_cameraAngle;
-	bool m_allocatedSide;
-	bool m_spinning;
-	double m_networkSleepTimer;
+
+	Box* m_box[10];
+	Ball* m_ball;
 };
 
 #endif

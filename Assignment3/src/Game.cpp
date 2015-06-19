@@ -4,9 +4,7 @@
 #include <iostream>
 #include "GameStateManager.h"
 #include "SplashState.h"
-#include "Procedural.h"
 #include "TestState.h"
-#include "MazeState.h"
 #include <Windows.h>
 #include <conio.h>
 #include <stdio.h>
@@ -42,7 +40,6 @@ Game::Game() {
 	ImGui_ImplGlfwGL3_Init(m_gameWindow, true);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	m_gameStateManager = new GameStateManager();
-	m_gameStateManager->RegisterState("Maze", new MazeState(m_gameWindow, m_gameStateManager));
 	m_gameStateManager->RegisterState("Test", new TestState(m_gameWindow, m_gameStateManager));
 	m_gameStateManager->Push("Test");
 }
