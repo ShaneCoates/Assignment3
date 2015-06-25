@@ -105,6 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\Camera.h" />
+    <ClInclude Include="inc\DIYPhysics\PhysicsObject.h" />
+    <ClInclude Include="inc\DIYPhysics\RigidBody.h" />
     <ClInclude Include="inc\FlyCamera.h" />
     <ClInclude Include="inc\Game.h" />
     <ClInclude Include="inc\GameStateManager.h" />

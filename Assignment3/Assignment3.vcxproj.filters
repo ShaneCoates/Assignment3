@@ -113,5 +113,11 @@
     <ClInclude Include="inc\physics\Ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="inc\DIYPhysics\PhysicsObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\DIYPhysics\RigidBody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
