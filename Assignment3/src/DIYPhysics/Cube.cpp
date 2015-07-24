@@ -7,5 +7,5 @@ Cube::Cube(glm::vec3 _position, glm::vec3 _extents, glm::vec3 _velocity, float _
 }
 
 void Cube::Draw() {
-	Gizmos::addAABB(m_position, m_extents, m_colour);
+	Gizmos::addAABBFilled(m_position, m_extents, m_colour);
 }
