@@ -87,8 +87,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\DIYPhysicsState.cpp" />
+    <ClCompile Include="src\DIYPhysics\Cube.cpp" />
     <ClCompile Include="src\DIYPhysics\PhysicsScene.cpp" />
+    <ClCompile Include="src\DIYPhysics\Plane.cpp" />
     <ClCompile Include="src\DIYPhysics\RigidBody.cpp" />
+    <ClCompile Include="src\DIYPhysics\Sphere.cpp" />
+    <ClCompile Include="src\DIYPhysics\Spring.cpp" />
     <ClCompile Include="src\FlyCamera.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameStateManager.cpp" />
@@ -107,11 +112,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\Camera.h" />
+    <ClInclude Include="inc\DIYPhysicsState.h" />
+    <ClInclude Include="inc\DIYPhysics\Cube.h" />
     <ClInclude Include="inc\DIYPhysics\PhysicsObject.h" />
     <ClInclude Include="inc\DIYPhysics\PhysicsScene.h" />
     <ClInclude Include="inc\DIYPhysics\Plane.h" />
     <ClInclude Include="inc\DIYPhysics\RigidBody.h" />
     <ClInclude Include="inc\DIYPhysics\Sphere.h" />
+    <ClInclude Include="inc\DIYPhysics\Spring.h" />
     <ClInclude Include="inc\FlyCamera.h" />
     <ClInclude Include="inc\Game.h" />
     <ClInclude Include="inc\GameStateManager.h" />

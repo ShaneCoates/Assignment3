@@ -14,6 +14,7 @@ public:
 
 	bool SphereToSphere(PhysicsObject* _actor1, PhysicsObject* _actor2);
 	bool SphereToPlane(PhysicsObject* _actor1, PhysicsObject* _actor2);
+	bool SphereToCube(PhysicsObject* _actor1, PhysicsObject* _actor2);
 
 	glm::vec3 m_gravity;
 	float m_timeStep;

@@ -11,7 +11,7 @@ public:
 	virtual void Draw();
 
 	float m_radius;
-
+	glm::vec4 m_colour;
 };
 
 #endif

@@ -5,6 +5,7 @@
 #include "GameStateManager.h"
 #include "SplashState.h"
 #include "TestState.h"
+#include "DIYPhysicsState.h"
 #include <Windows.h>
 #include <conio.h>
 #include <stdio.h>
@@ -41,7 +42,9 @@ Game::Game() {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	m_gameStateManager = new GameStateManager();
 	m_gameStateManager->RegisterState("Test", new TestState(m_gameWindow, m_gameStateManager));
-	m_gameStateManager->Push("Test");
+	m_gameStateManager->RegisterState("Physics", new PhysicsState(m_gameWindow, m_gameStateManager));
+
+	m_gameStateManager->Push("Physics");
 }
 Game::~Game() {
 	delete m_gameStateManager;

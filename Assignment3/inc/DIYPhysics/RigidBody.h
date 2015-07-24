@@ -6,7 +6,7 @@
 #include "glm\ext.hpp"
 class RigidBody : public PhysicsObject {
 public:
-	RigidBody(glm::vec3 _position, glm::vec3 _velocity, glm::quat _rotation, float mass);
+	RigidBody(glm::vec3 _position, glm::vec3 _velocity, glm::quat _rotation, float _mass);
 	virtual void Update(glm::vec3 _gravity, double _dt);
 	virtual void Draw();
 	void ApplyForce(glm::vec3 _force);
@@ -16,6 +16,7 @@ public:
 	glm::vec3 m_velocity;
 	float m_mass;
 	glm::quat m_rotation;
+	bool m_static;
 };
 
 #endif
