@@ -1,14 +1,16 @@
 #include "DIYPhysics\Spring.h"
 #include "aieutilities\Gizmos.h"
-Spring::Spring(RigidBody* _object1, RigidBody* _object2, float _springCoefficient) : PhysicsObject(){
+Spring::Spring(RigidBody* _object1, RigidBody* _object2, float _springCoefficient, float _distance) : PhysicsObject(){
 	m_object1 = _object1;
 	m_object2 = _object2;
 	m_springCoefficient = _springCoefficient;
+	m_distance = _distance;
 }
 
 void Spring::Update(glm::vec3 _gravity, double _dt) {
 	
 	glm::vec3 direction = m_object1->m_position - m_object2->m_position;
+	direction -= glm::normalize(direction) * m_distance;
 	direction *= -m_springCoefficient;
 	m_object1->ApplyForce(direction);
 	m_object2->ApplyForce(-direction);

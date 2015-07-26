@@ -7,7 +7,7 @@
 #include "glm.hpp"
 class Spring : public PhysicsObject {
 public:
-	Spring(RigidBody* _object1, RigidBody* _object2, float _springCoefficient = 1);
+	Spring(RigidBody* _object1, RigidBody* _object2, float _springCoefficient = 1, float _distance = 0);
 
 	virtual void Update(glm::vec3 _gravity, double _dt);
 	virtual void Draw();
@@ -16,6 +16,7 @@ public:
 	RigidBody* m_object2;
 
 	float m_springCoefficient;
+	float m_distance;
 };
 
 #endif

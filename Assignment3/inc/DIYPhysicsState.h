@@ -16,6 +16,8 @@ Description: Test Game State - Remove before release
 #include "DIYPhysics\Sphere.h"
 #include "DIYPhysics\Plane.h"
 #include "DIYPhysics\Cube.h"
+#include "DIYPhysics\Spring.h"
+
 #include <vector>
 struct GLFWwindow;
 class FlyCamera;
@@ -54,6 +56,7 @@ private:
 	std::vector<Sphere*> m_spheres;
 	Cube* m_cube[4];
 	Plane* m_plane;
+	Spring* m_spring;
 
 };
 
