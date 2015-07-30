@@ -8,7 +8,7 @@ public:
 	CharacterController(physx::PxScene* _scene, physx::PxMaterial* _material, GLFWwindow* _window);
 	~CharacterController();
 
-	void Update(double _dt);
+	void Update(float _dt);
 	void Draw();
 private:
 	GLFWwindow* m_window;

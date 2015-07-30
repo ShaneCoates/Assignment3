@@ -9,26 +9,26 @@ void Utils::ConvertVec3(PxVec3 _in, vec3& _out) {
 void Utils::ConvertVec3(vec3 _in, PxVec3& _out) {
 	_out = PxVec3(_in.x, _in.y, _in.z);
 }
-void Utils::AddWidget(PxShape* _shape, PxRigidActor* _actor) {
+void Utils::AddWidget(PxShape* _shape, PxRigidActor* _actor, glm::vec4 _colour) {
 	PxGeometryType::Enum type = _shape->getGeometryType();
 	
 	switch (type)
 	{
 	case PxGeometryType::eBOX:
-		AddBox(_shape, _actor);
+		AddBox(_shape, _actor, _colour);
 		break;
 	case PxGeometryType::eSPHERE:
-		AddSphere(_shape, _actor);
+		AddSphere(_shape, _actor, _colour);
 		break;
 	case PxGeometryType::eCAPSULE:
-		AddCapsule(_shape, _actor);
+		AddCapsule(_shape, _actor, _colour);
 		break;
 	default:
-		AddSphere(_shape, _actor);
+		AddSphere(_shape, _actor, _colour);
 		break;
 	}
 }
-void Utils::AddBox(PxShape* _shape, PxRigidActor* _actor) {
+void Utils::AddBox(PxShape* _shape, PxRigidActor* _actor, glm::vec4 _colour) {
 	vec3 BoxCenter, BoxExtents;
 	PxBoxGeometry geometry;
 	_shape->getBoxGeometry(geometry);
@@ -36,18 +36,18 @@ void Utils::AddBox(PxShape* _shape, PxRigidActor* _actor) {
 	Utils::ConvertVec3(geometry.halfExtents, BoxExtents);
 
 	glm::mat4 newRot = Utils::TransformToMat4(_actor->getGlobalPose());
-	Gizmos::addAABBFilled(BoxCenter, BoxExtents, glm::vec4(1), &newRot);
+	Gizmos::addAABBFilled(BoxCenter, BoxExtents, _colour, &newRot);
 }
-void Utils::AddSphere(PxShape* _shape, PxRigidActor* _actor) {
+void Utils::AddSphere(PxShape* _shape, PxRigidActor* _actor, glm::vec4 _colour) {
 	vec3 center;
 	PxSphereGeometry geometry;
 	_shape->getSphereGeometry(geometry);
 	float radius = geometry.radius;
 	Utils::ConvertVec3(_actor->getWorldBounds().getCenter(), center);
 	glm::mat4 newRot = Utils::TransformToMat4(_actor->getGlobalPose());
-	Gizmos::addSphere(center, radius, 5, 5, glm::vec4(1, 0, 0, 1), &newRot);
+	Gizmos::addSphere(center, radius, 5, 5, _colour, &newRot);
 }
-void Utils::AddCapsule(PxShape* _shape, PxRigidActor* _actor) {
+void Utils::AddCapsule(PxShape* _shape, PxRigidActor* _actor, glm::vec4 _colour) {
 	vec3 center;
 	PxCapsuleGeometry geometry;
 	_shape->getCapsuleGeometry(geometry);
@@ -69,6 +69,6 @@ void Utils::AddCapsule(PxShape* _shape, PxRigidActor* _actor) {
 	glm::mat4 m2 = glm::rotate(*M, 11 / 7.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 
 
-	Gizmos::addCylinderFilled(center, radius, halfHeight, 10, glm::vec4(1), &m2);
+	Gizmos::addCylinderFilled(center, radius, halfHeight, 10, _colour, &m2);
 
 }

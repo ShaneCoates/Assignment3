@@ -15,16 +15,16 @@ Ragdoll::Ragdoll(PxPhysics* _physics, PxScene* _scene, PxMaterial* _ragdollMater
 		new RagdollNode(PxQuat(0, Z_AXIS), UPPER_SPINE, 1, 1.5, 1, 1, "right clavicle"),
 		new RagdollNode(PxQuat(PxPi / 2.0f, Z_AXIS), UPPER_SPINE, 1, 1, 1, -1, "neck"),
 		new RagdollNode(PxQuat(PxPi / 2.0f, Z_AXIS), NECK, 1, 3, 1, -1, "HEAD"),
-		new RagdollNode(PxQuat(PxPi - .3, Z_AXIS), LEFT_CLAVICLE, 3, 1.5, -1, 1, "left upper arm"),
-		new RagdollNode(PxQuat(0.3, Z_AXIS), RIGHT_CLAVICLE, 3, 1.5, -1, 1, "right upper arm"),
-		new RagdollNode(PxQuat(PxPi - .3, Z_AXIS), LEFT_UPPER_ARM, 3, 1, -1, 1, "left lower arm"),
-		new RagdollNode(PxQuat(0.3, Z_AXIS), RIGHT_UPPER_ARM, 3, 1, -1, 1, "right lower arm"),
+		new RagdollNode(PxQuat(PxPi - .3f, Z_AXIS), LEFT_CLAVICLE, 3, 1.5, -1, 1, "left upper arm"),
+		new RagdollNode(PxQuat(0.3f, Z_AXIS), RIGHT_CLAVICLE, 3, 1.5, -1, 1, "right upper arm"),
+		new RagdollNode(PxQuat(PxPi - .3f, Z_AXIS), LEFT_UPPER_ARM, 3, 1, -1, 1, "left lower arm"),
+		new RagdollNode(PxQuat(0.3f, Z_AXIS), RIGHT_UPPER_ARM, 3, 1, -1, 1, "right lower arm"),
 		NULL
 	};
-	PxArticulation* ragdollArticulation;
-	m_ragdoll = MakeRagdoll(_physics, ragdollData, PxTransform(PxVec3(0, 20, 0)), 0.1f, _ragdollMaterial);
+	m_ragdoll = MakeRagdoll(_physics, ragdollData, PxTransform(PxVec3(-10, 15, -10.2f)), 0.1f, _ragdollMaterial);
 	_scene->addArticulation(*m_ragdoll);
 	m_scene = _scene;
+	m_ragdoll->putToSleep();
 }
 Ragdoll::~Ragdoll() {
 
@@ -103,4 +103,7 @@ void Ragdoll::AddForce(PxVec3 _direction) {
 	while (nLinks--) {
 		links[nLinks]->addForce(_direction);
 	}
+}
+void Ragdoll::WakeUp() {
+	m_ragdoll->wakeUp();
 }

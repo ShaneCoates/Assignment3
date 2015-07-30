@@ -1,7 +1,6 @@
 #include "ParticleEmitter.h"
 #include <iostream>
 #include<vector>
-#define GLM_SWIZZLE
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 #include "aieutilities/Gizmos.h"

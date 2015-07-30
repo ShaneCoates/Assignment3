@@ -18,6 +18,7 @@
 #include "ParticleFluidEmitter.h"
 #include "physics\Ragdoll.h"
 #include "physics\CharacterController.h"
+#include "physics\TriggerVolume.h"
 using namespace physx;
 
 struct GLFWwindow;
@@ -89,6 +90,9 @@ private:
 
 	CharacterController* m_character;
 	
+	PxRigidStatic* m_randomActor;
+	TriggerVolume* m_triggerVolume;
+
 };
 
 #endif

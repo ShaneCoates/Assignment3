@@ -109,6 +109,7 @@
     <ClCompile Include="src\physics\CharacterController.cpp" />
     <ClCompile Include="src\physics\MyControllerHitReport.cpp" />
     <ClCompile Include="src\physics\Ragdoll.cpp" />
+    <ClCompile Include="src\physics\TriggerVolume.cpp" />
     <ClCompile Include="src\ShaderLoader.cpp" />
     <ClCompile Include="src\Skybox.cpp" />
     <ClCompile Include="src\SplashState.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="inc\physics\CharacterController.h" />
     <ClInclude Include="inc\physics\MyControllerHitReport.h" />
     <ClInclude Include="inc\physics\Ragdoll.h" />
+    <ClInclude Include="inc\physics\TriggerVolume.h" />
     <ClInclude Include="inc\ShaderLoader.h" />
     <ClInclude Include="inc\Skybox.h" />
     <ClInclude Include="inc\SplashState.h" />

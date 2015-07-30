@@ -22,11 +22,12 @@ CharacterController::CharacterController(physx::PxScene* _scene, physx::PxMateri
 	m_characterRotation = 0;
 	m_playerGravity = -0.5f;
 	m_hitReport->clearPlayercontactNormal();
+
 }
 CharacterController::~CharacterController() {
 
 }
-void CharacterController::Update(double _dt) {
+void CharacterController::Update(float _dt) {
 	bool onGround;
 	float movementSpeed = 10.0f;
 	float rotationSpeed = 1.0f;

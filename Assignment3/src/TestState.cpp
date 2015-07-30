@@ -23,13 +23,21 @@ void TestState::Init(GLFWwindow* _window, GameStateManager* _gameStateManager) {
 	PxTransform pose = PxTransform(PxVec3(0.0f, 0, 0.0f), PxQuat(PxHalfPi*1.0f, PxVec3(0.0f, 0, 1)));
 	PxRigidStatic* plane = PxCreateStatic(*g_Physics, pose, PxPlaneGeometry(), *g_PhysicsMaterial);
 	g_PhysicsScene->addActor(*plane);
-	for (int i = 0; i < 6; i++) {
-		m_box[i] = new Box(PxVec3(i * 3, 13, i * 4), PxVec3(i+1, i+1, i+1), 2.0f, g_PhysicsMaterial, g_Physics, g_PhysicsScene, vec4(0.5f, 0.5f, 1, 1));
+	for (PxReal i = 0; i < 2; i++) {
+		m_box[(int)i] = new Box(PxVec3(i * 3, 13, i * 4), PxVec3(i+1, i+1, i+1), 2.0f, g_PhysicsMaterial, g_Physics, g_PhysicsScene, vec4(0.5f, 0.5f, 1, 1));
 	}
 	m_ball = new Ball(PxVec3(0, 10, 1), 5, 2, g_PhysicsMaterial, g_Physics, g_PhysicsScene, vec4(1, 0.5f, 0.5f, 1));
 
-	PxVec3 side1(4.5f, 0.25f, 0.5f);
-	PxVec3 side2(0.5f, 0.25f, 4.5f);
+	PxVec3 side1(45, 2.5f, 5);
+	PxVec3 side2(05, 2.5f, 45);
+	m_box[2] = new Box(PxVec3(0, 02.5f, 40), side1, 0, g_PhysicsMaterial, g_Physics, g_PhysicsScene, glm::vec4(1), true);
+	m_box[3] = new Box(PxVec3(0, 02.5f, -40), side1, 0, g_PhysicsMaterial, g_Physics, g_PhysicsScene, glm::vec4(1), true);
+	m_box[4] = new Box(PxVec3(40, 02.5f, 00), side2, 0, g_PhysicsMaterial, g_Physics, g_PhysicsScene, glm::vec4(1), true);
+	m_box[5] = new Box(PxVec3(-40, 02.5f, 00), side2, 0, g_PhysicsMaterial, g_Physics, g_PhysicsScene, glm::vec4(1), true);
+
+
+	side1 = PxVec3(4.5f, 0.25f, 0.5f);
+	side2 = PxVec3(0.5f, 0.25f, 4.5f);
 	m_box[6] = new Box(PxVec3(20.0f, 0.25f, 4.0f), side1, 0, g_PhysicsMaterial, g_Physics, g_PhysicsScene, glm::vec4(1), true);
 	m_box[7] = new Box(PxVec3(20.0f, 0.25f, -4.0f), side1, 0, g_PhysicsMaterial, g_Physics, g_PhysicsScene, glm::vec4(1), true);
 	m_box[8] = new Box(PxVec3(24.0f, 0.25f, 0.0f), side2, 0, g_PhysicsMaterial, g_Physics, g_PhysicsScene, glm::vec4(1), true);
@@ -52,14 +60,18 @@ void TestState::Init(GLFWwindow* _window, GameStateManager* _gameStateManager) {
 
 	if (pf) {
 		g_PhysicsScene->addActor(*pf);
-		m_particleEmitter = new ParticleFluidEmitter(maxParticles, PxVec3(20, 10, 0), pf, .01);
+		m_particleEmitter = new ParticleFluidEmitter(maxParticles, PxVec3(20, 10, 0), pf, .01f);
 		m_particleEmitter->setStartVelocityRange(-0.001f, -250.0f, -0.001f, 0.001f, 250.0f, 0.001f);
 	}
 	m_ragdoll = new Ragdoll(g_Physics, g_PhysicsScene, g_PhysicsMaterial);
 	
 	m_character = new CharacterController(g_PhysicsScene, g_PhysicsMaterial, m_window);
-	
 
+	PxShape* shape = g_Physics->createShape(PxBoxGeometry(5, 5, 5), *g_PhysicsMaterial);
+	
+	m_randomActor = PxCreateStatic(*g_Physics, PxTransform(PxVec3(-10, 5, -10)), PxBoxGeometry(PxVec3(0.1f, 0.1f, 0.1f)), *g_PhysicsMaterial);
+	g_PhysicsScene->addActor(*m_randomActor);
+	m_triggerVolume = new TriggerVolume(g_PhysicsScene, m_randomActor, shape);
 }
 
 TestState::~TestState() {
@@ -74,20 +86,21 @@ TestState::~TestState() {
 void TestState::Update(double _dt) {
 	m_camera->Update(_dt);
 
-	m_character->Update(_dt);
+	m_character->Update((float)_dt);
 
 	for (int i = 0; i < 10; i++) {
 		m_box[i]->Update(_dt);
 	}
 	m_ball->Update(_dt);
 	if (m_particleEmitter) {
-		m_particleEmitter->update(_dt);
+		m_particleEmitter->update((float)_dt);
 	}
 
 	if (glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS) {
 		m_ragdoll->AddForce(PxVec3(0, 600, 0));
 	}
 
+	m_triggerVolume->Update(_dt);
 
 	UpdatePhysX(_dt);
 }
@@ -110,12 +123,21 @@ void TestState::Draw() {
 	}
 	m_ragdoll->Draw();
 
+	PxU32 nShapes = m_randomActor->getNbShapes();
+	PxShape** shapes = new PxShape*[nShapes];
+	m_randomActor->getShapes(shapes, nShapes);
+	Utils::AddWidget(shapes[0], m_randomActor);
+
+	m_triggerVolume->Draw();
+
 	Gizmos::draw(m_camera->GetProjectionView());
 	DrawGUI();
 }
 
 void TestState::DrawGUI() {
-
+	if (m_triggerVolume->m_triggered) {
+		m_ragdoll->WakeUp();
+	}
 }
 
 void TestState::SetUpPhysX() {
@@ -145,8 +167,9 @@ void TestState::UpdatePhysX(double _dt) {
 	if (_dt <= 0) {
 		return;
 	}
-	g_PhysicsScene->simulate(_dt);
+	g_PhysicsScene->simulate((physx::PxReal)_dt);
 	while (g_PhysicsScene->fetchResults() == false) {
 
 	}
 }
+

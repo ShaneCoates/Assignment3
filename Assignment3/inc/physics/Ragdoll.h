@@ -60,6 +60,8 @@ public:
 
 	PxArticulation* MakeRagdoll(PxPhysics* _physics, RagdollNode** _nodeArray, PxTransform _worldPos, float _scaleFactor, PxMaterial* _ragdollMaterial);
 	void AddForce(PxVec3 _direction);
+
+	void WakeUp();
 private:
 	PxArticulation* m_ragdoll;
 	PxScene* m_scene;
