@@ -1,9 +1,14 @@
 #include "physics\Box.h"
 #include "Utils.h"
-Box::Box(PxVec3 _transform, PxVec3 _extents, float _density, PxMaterial* _material, PxPhysics* _physics, PxScene* _physicsScene, vec4 _colour) {
+Box::Box(PxVec3 _transform, PxVec3 _extents, float _density, PxMaterial* _material, PxPhysics* _physics, PxScene* _physicsScene, vec4 _colour, bool _static) {
 	m_colour = _colour;
 	Utils::ConvertVec3(_extents, m_extents);
-	m_rigidBody = PxCreateDynamic(*_physics, PxTransform(_transform), PxBoxGeometry(_extents), *_material, _density);
+	if (!_static) {
+		m_rigidBody = PxCreateDynamic(*_physics, PxTransform(_transform), PxBoxGeometry(_extents), *_material, _density);
+	}
+	else {
+		m_rigidBody = PxCreateStatic(*_physics, PxTransform(_transform), PxBoxGeometry(_extents), *_material);
+	}
 	_physicsScene->addActor(*m_rigidBody);
 }
 

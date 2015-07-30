@@ -40,8 +40,8 @@ public:
 							const glm::vec4& a_colour, const glm::mat4* a_transform = nullptr);
 
 	// Adds an Axis-Aligned Bounding-Box with optional transform for rotation.
-	static void		addAABBFilled(const glm::vec3& a_center, const glm::vec3& a_extents, 
-								  const glm::vec4& a_fillColour, const glm::mat4* a_transform = nullptr);
+	static void		addAABBFilled(const glm::vec3& a_center, const glm::vec3& a_extents,
+							const glm::vec4& a_fillColour, const glm::mat4* a_transform = nullptr, bool a_lines = true);
 
 	// Adds a cylinder aligned to the Y-axis with optional transform for rotation.
 	static void		addCylinderFilled(const glm::vec3& a_center, float a_radius, float a_fHalfLength,

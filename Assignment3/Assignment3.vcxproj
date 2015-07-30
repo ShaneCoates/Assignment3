@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{77CBA65E-14B5-4C6F-8F70-F869856004B4}</ProjectGuid>
+    <ProjectGuid>{52981B94-2A87-4782-9F04-5D200C8643CF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Assignment1</RootNamespace>
     <ProjectName>Assignment3</ProjectName>
@@ -102,8 +102,13 @@
     <ClCompile Include="src\imgui.cpp" />
     <ClCompile Include="src\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ParticleEmitter.cpp" />
+    <ClCompile Include="src\ParticleFluidEmitter.cpp" />
     <ClCompile Include="src\physics\Ball.cpp" />
     <ClCompile Include="src\physics\Box.cpp" />
+    <ClCompile Include="src\physics\CharacterController.cpp" />
+    <ClCompile Include="src\physics\MyControllerHitReport.cpp" />
+    <ClCompile Include="src\physics\Ragdoll.cpp" />
     <ClCompile Include="src\ShaderLoader.cpp" />
     <ClCompile Include="src\Skybox.cpp" />
     <ClCompile Include="src\SplashState.cpp" />
@@ -125,8 +130,13 @@
     <ClInclude Include="inc\GameStateManager.h" />
     <ClInclude Include="inc\gl_core_4_4.h" />
     <ClInclude Include="inc\ObjectOBJ.h" />
+    <ClInclude Include="inc\ParticleEmitter.h" />
+    <ClInclude Include="inc\ParticleFluidEmitter.h" />
     <ClInclude Include="inc\physics\Ball.h" />
     <ClInclude Include="inc\physics\Box.h" />
+    <ClInclude Include="inc\physics\CharacterController.h" />
+    <ClInclude Include="inc\physics\MyControllerHitReport.h" />
+    <ClInclude Include="inc\physics\Ragdoll.h" />
     <ClInclude Include="inc\ShaderLoader.h" />
     <ClInclude Include="inc\Skybox.h" />
     <ClInclude Include="inc\SplashState.h" />

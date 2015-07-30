@@ -36,6 +36,7 @@ private:
 	
 	//Game State Manager
 	GameStateManager* m_gameStateManager;
+
 };
 
 #endif

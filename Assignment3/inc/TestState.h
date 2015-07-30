@@ -15,6 +15,9 @@
 #include <PxPhysicsAPI.h>
 #include <PxScene.h>
 #include <pvd\PxVisualDebugger.h>
+#include "ParticleFluidEmitter.h"
+#include "physics\Ragdoll.h"
+#include "physics\CharacterController.h"
 using namespace physx;
 
 struct GLFWwindow;
@@ -79,6 +82,13 @@ private:
 
 	Box* m_box[10];
 	Ball* m_ball;
+
+	ParticleFluidEmitter* m_particleEmitter;
+
+	Ragdoll* m_ragdoll;
+
+	CharacterController* m_character;
+	
 };
 
 #endif

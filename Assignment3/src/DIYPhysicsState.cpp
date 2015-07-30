@@ -7,6 +7,7 @@
 #include "Skybox.h"
 #include "Utils.h"
 #include "DIYPhysics\Spring.h"
+
 #define IM_ARRAYSIZE(_ARR)          ((int)(sizeof(_ARR)/sizeof(*_ARR)))
 
 void PhysicsState::Init(GLFWwindow* _window, GameStateManager* _gameStateManager) {
@@ -22,7 +23,7 @@ void PhysicsState::Init(GLFWwindow* _window, GameStateManager* _gameStateManager
 	m_physicsScene->m_gravity = glm::vec3(0, -9.8, 0);
 	m_physicsScene->m_timeStep = 0.001f;
 	
-	for (int i = 1; i <= 11; i++) {
+	for (float i = 1; i <= 11; i++) {
 		m_spheres.push_back(new Sphere(glm::vec3(cosf(i), 30, sinf(i)), glm::vec3(0, 0, 0), i, i * 0.5f, glm::vec4(1, 0, 1, 1)));
 	}
 

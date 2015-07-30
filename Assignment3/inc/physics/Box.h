@@ -9,16 +9,17 @@ using namespace glm;
 class Box
 {
 public:
-	Box(PxVec3 _transform, PxVec3 _extents, float _density, PxMaterial* _material, PxPhysics* _physics, PxScene* _physicsScene, vec4 _colour = vec4(1));
+	Box(PxVec3 _transform, PxVec3 _extents, float _density, PxMaterial* _material, PxPhysics* _physics, PxScene* _physicsScene, vec4 _colour = vec4(1), bool _static = false);
 	~Box();
 
 	void Update(double _dt);
 	void Draw();
 private:
 
-	PxRigidDynamic* m_rigidBody;
+	PxRigidActor* m_rigidBody;
 	vec3 m_extents;
 	vec4 m_colour;
+	bool m_static;
 };
 
 #endif

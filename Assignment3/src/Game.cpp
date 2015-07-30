@@ -44,7 +44,7 @@ Game::Game() {
 	m_gameStateManager->RegisterState("Test", new TestState(m_gameWindow, m_gameStateManager));
 	m_gameStateManager->RegisterState("Physics", new PhysicsState(m_gameWindow, m_gameStateManager));
 
-	m_gameStateManager->Push("Physics");
+	m_gameStateManager->Push("Test");
 }
 Game::~Game() {
 	delete m_gameStateManager;
@@ -63,6 +63,15 @@ void Game::Run() {
 		ImGui_ImplGlfwGL3_NewFrame();
 		ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
 		ImGui::Separator();
+
+		if (glfwGetKey(m_gameWindow, GLFW_KEY_1) == GLFW_PRESS) {
+			m_gameStateManager->Pop();
+			m_gameStateManager->Push("Test");
+		}
+		if (glfwGetKey(m_gameWindow, GLFW_KEY_2) == GLFW_PRESS) {
+			m_gameStateManager->Pop();
+			m_gameStateManager->Push("Physics");
+		}
 
 		m_gameStateManager->Update(dt);
 		m_gameStateManager->Draw();
