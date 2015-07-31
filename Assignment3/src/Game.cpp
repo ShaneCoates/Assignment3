@@ -24,7 +24,7 @@ Game::Game() {
 		printf("Failed to initialise GLFW");
 		return;
 	}
-	m_gameWindow = glfwCreateWindow(1240, 768, "Assignment Two - Shane Coates", nullptr, nullptr);
+	m_gameWindow = glfwCreateWindow(1240, 768, "Assignment Three - Shane Coates", nullptr, nullptr);
 	if (m_gameWindow == nullptr) {
 		printf("Failed to create Game Window");
 		glfwTerminate();

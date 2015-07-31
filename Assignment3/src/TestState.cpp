@@ -102,6 +102,10 @@ void TestState::Update(double _dt) {
 
 	m_triggerVolume->Update(_dt);
 
+	if (m_triggerVolume->m_triggered) {
+		m_ragdoll->WakeUp();
+	}
+
 	UpdatePhysX(_dt);
 }
 void TestState::Draw() {
@@ -135,9 +139,7 @@ void TestState::Draw() {
 }
 
 void TestState::DrawGUI() {
-	if (m_triggerVolume->m_triggered) {
-		m_ragdoll->WakeUp();
-	}
+
 }
 
 void TestState::SetUpPhysX() {
