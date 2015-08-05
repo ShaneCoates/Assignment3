@@ -99,12 +99,12 @@ void TestState::Update(double _dt) {
 	if (glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS) {
 		m_ragdoll->AddForce(PxVec3(0, 600, 0));
 	}
-
-	m_triggerVolume->Update(_dt);
-
 	if (m_triggerVolume->m_triggered) {
 		m_ragdoll->WakeUp();
 	}
+	m_triggerVolume->Update(_dt);
+
+
 
 	UpdatePhysX(_dt);
 }
